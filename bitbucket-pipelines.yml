@@ -1,13 +1,13 @@
-image: node: 10.15.3
+image: node:10.15.3
 
 pipelines:
   pull-requests:
     '**':
       - step:
-        name: Build and run tests
-        caches:
-          - node
-        script:
-          - cd my-app
-          - npm install
-          - npm test
+          name: Build and run tests
+          caches:
+            - node
+          script:
+            - cd my-app
+            - npm install
+            - npm test
