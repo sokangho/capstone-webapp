@@ -24,7 +24,9 @@ module.exports = {
   rules: {
     'react/jsx-indent': ['error', 2],
     'react/jsx-filename-extension': [1, { 'extensions': ['.js', '.jsx'] }],
-    'import/no-unresolved': [2, { ignore: [ 'react-router-dom' ] }],
-    'arrow-body-style': 'off'
+    'import/no-unresolved': [2, { ignore: [ 'react-router-dom', 'lodash.get' ] }],
+    'comma-dangle': ['error', 'never'],
+    'arrow-body-style': 'off',
+    'arrow-parens': ['error', 'as-needed']
   },
 };
