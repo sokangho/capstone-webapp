@@ -14,7 +14,7 @@ const Panel = styled.div`
   outline: 1px solid ${colors.borderLight};
 `;
 
-const ContentContainer = styled.div`
+const ContentContainer = styled.form`
   padding: 20px;
 `;
 
@@ -70,13 +70,16 @@ const LoginButton = styled.button`
 const LoginPanel = () => {
   return (
     <Panel>
-      <ContentContainer>
+      <ContentContainer
+        action={`http://${process.env.REACT_APP_API_URL}/accounts/login`}
+        method="post"
+      >
         <LoginHeading>Log In</LoginHeading>
         <InputLabel htmlFor="username">Username</InputLabel>
         <InputBox type="text" id="username" name="username" placeholder="Username" />
         <InputLabel htmlFor="password">Password</InputLabel>
         <InputBox type="password" id="password" name="password" placeholder="Password" />
-        <LoginButton>Log In</LoginButton>
+        <LoginButton type="submit">Log In</LoginButton>
       </ContentContainer>
     </Panel>
   );
