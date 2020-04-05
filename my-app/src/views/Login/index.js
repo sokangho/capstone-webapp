@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { fontUrls, colors, fonts } from '../../styleGuide';
-import FontLoader from '../../components/FontLoader';
+import fontLoader from '../../components/FontLoader';
 import LoginPanel from '../../components/LoginPanel';
 
 const ContentContainer = styled.div`
@@ -29,17 +30,34 @@ const AppSubHeading = styled.h2`
   margin: 0px;
 `;
 
-const LoginView = () => {
-  return (
-    <>
-      <FontLoader url={fontUrls.robotoSlab} />
-      <ContentContainer>
-        <AppHeading>One Time Password</AppHeading>
-        <AppSubHeading>Manager</AppSubHeading>
-        <LoginPanel />
-      </ContentContainer>
-    </>
-  );
+const URL = fontUrls.robotoSlab;
+
+class LoginView extends Component {
+  componentDidMount() {
+    const { document } = this.props;
+    fontLoader(URL, document);
+  }
+
+  render() {
+    return (
+      <>
+        <ContentContainer>
+          <AppHeading>One Time Password</AppHeading>
+          <AppSubHeading>Manager</AppSubHeading>
+          <LoginPanel />
+        </ContentContainer>
+      </>
+    );
+  }
+}
+
+// Done to simply testing, can pass mocked document as prop
+LoginView.propTypes = {
+  document: PropTypes.object
+};
+
+LoginView.defaultProps = {
+  document: window.document
 };
 
 export default LoginView;

@@ -11,3 +11,4 @@ pipelines:
             - cd my-app
             - npm install
             - npm test
+            - npm run lint

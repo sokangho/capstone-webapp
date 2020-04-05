@@ -72,9 +72,9 @@ const LoginPanel = () => {
     <Panel>
       <ContentContainer>
         <LoginHeading>Log In</LoginHeading>
-        <InputLabel for="username">Username</InputLabel>
+        <InputLabel htmlFor="username">Username</InputLabel>
         <InputBox type="text" id="username" name="username" placeholder="Username" />
-        <InputLabel for="password">Password</InputLabel>
+        <InputLabel htmlFor="password">Password</InputLabel>
         <InputBox type="password" id="password" name="password" placeholder="Password" />
         <LoginButton>Log In</LoginButton>
       </ContentContainer>

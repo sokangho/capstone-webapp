@@ -1,6 +1,6 @@
 import lodashGet from 'lodash.get';
 
-const hasStyleSheetLoaded = url => {
+const hasStyleSheetLoaded = (url, document) => {
   const styleSheetList = lodashGet(document, 'styleSheets', []);
 
   for (let i = 0; i < styleSheetList.length; i += 1) {
@@ -11,10 +11,8 @@ const hasStyleSheetLoaded = url => {
   return false;
 };
 
-const FontLoader = props => {
-  const { url } = props;
-
-  if (!hasStyleSheetLoaded(url)) {
+const fontLoader = (url, document) => {
+  if (!hasStyleSheetLoaded(url, document)) {
     const element = document.createElement('link');
     element.setAttribute('href', url);
     element.setAttribute('rel', 'stylesheet');
@@ -24,4 +22,4 @@ const FontLoader = props => {
   return null;
 };
 
-export default FontLoader;
+export default fontLoader;
