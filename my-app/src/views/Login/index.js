@@ -36,7 +36,7 @@ const LoginView = () => {
       <ContentContainer>
         <AppHeading>One Time Password</AppHeading>
         <AppSubHeading>Manager</AppSubHeading>
-        <LoginPanel></LoginPanel>
+        <LoginPanel />
       </ContentContainer>
     </>
   );
