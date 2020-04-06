@@ -1,5 +1,9 @@
+/* eslint-disable */
+
 import React from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
+
 import { colors, fonts } from '../../styleGuide';
 
 const Panel = styled.div`
@@ -67,22 +71,69 @@ const LoginButton = styled.button`
   border-radius: 3px;
 `;
 
-const LoginPanel = () => {
-  return (
-    <Panel>
-      <ContentContainer
-        action={`http://${process.env.REACT_APP_API_URL}/accounts/login`}
-        method="post"
-      >
-        <LoginHeading>Log In</LoginHeading>
-        <InputLabel htmlFor="username">Username</InputLabel>
-        <InputBox type="text" id="username" name="username" placeholder="Username" />
-        <InputLabel htmlFor="password">Password</InputLabel>
-        <InputBox type="password" id="password" name="password" placeholder="Password" />
-        <LoginButton type="submit">Log In</LoginButton>
-      </ContentContainer>
-    </Panel>
-  );
-};
+class LoginPanel extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      username: '',
+      password: ''
+    };
+
+    this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+  }
+
+  onChange(e) {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  }
+
+  onSubmit(e) {
+    e.preventDefault();
+
+    axios
+      .post(`${process.env.REACT_APP_API_URL}/accounts/login`, {
+        username: this.state.username,
+        password: this.state.password
+      })
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
+  render() {
+    return (
+      <Panel>
+        <ContentContainer onChange={this.onChange} onSubmit={this.onSubmit}>
+          <LoginHeading>Log In</LoginHeading>
+          <InputLabel htmlFor="username">Username</InputLabel>
+          <InputBox
+            type="text"
+            id="username"
+            name="username"
+            placeholder="Username"
+            value={this.state.username}
+            onChange={this.onChange}
+          />
+          <InputLabel htmlFor="password">Password</InputLabel>
+          <InputBox
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Password"
+            value={this.state.password}
+            onChange={this.onChange}
+          />
+          <LoginButton type="submit">Log In</LoginButton>
+        </ContentContainer>
+      </Panel>
+    );
+  }
+}
 
 export default LoginPanel;
