@@ -3,6 +3,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
+import { Redirect } from 'react-router-dom';
 
 import { colors, fonts } from '../../styleGuide';
 
@@ -77,7 +78,8 @@ class LoginPanel extends React.Component {
 
     this.state = {
       username: '',
-      password: ''
+      password: '',
+      redirect: null
     };
 
     this.onChange = this.onChange.bind(this);
@@ -90,23 +92,30 @@ class LoginPanel extends React.Component {
     });
   }
 
-  onSubmit(e) {
+  async onSubmit(e) {
     e.preventDefault();
 
-    axios
-      .post(`${process.env.REACT_APP_API_URL}/accounts/login`, {
-        username: this.state.username,
-        password: this.state.password
-      })
-      .then(res => {
-        console.log(res);
-      })
-      .catch(err => {
-        console.log(err);
+    const options = {
+      method: 'POST',
+      data: { username: this.state.username, password: this.state.password },
+      url: `${process.env.REACT_APP_API_URL}/accounts/login`
+    };
+    const res = await axios(options);
+
+    // Login successful
+    if (res.status == 200) {
+      // Redirect to application page
+      this.setState({
+        redirect: `/accounts/${res.data.id}`
       });
+    }
   }
 
   render() {
+    if (this.state.redirect != null) {
+      return <Redirect to={this.state.redirect} />;
+    }
+
     return (
       <Panel>
         <ContentContainer onChange={this.onChange} onSubmit={this.onSubmit}>
