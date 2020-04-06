@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import axios from 'axios';
+import { Redirect } from 'react-router-dom';
+
 import { fontUrls, colors, fonts } from '../../styleGuide';
 import fontLoader from '../../components/FontLoader';
 import LoginPanel from '../../components/LoginPanel';
@@ -33,18 +36,51 @@ const AppSubHeading = styled.h2`
 const URL = fontUrls.robotoSlab;
 
 class LoginView extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      redirect: null
+    };
+
+    this.onSubmit = this.onSubmit.bind(this);
+  }
+
   componentDidMount() {
     const { document } = this.props;
     fontLoader(URL, document);
   }
 
+  async onSubmit(credential) {
+    const options = {
+      method: 'POST',
+      data: { username: credential.username, password: credential.password },
+      url: `${process.env.REACT_APP_API_URL}/accounts/login`
+    };
+    const res = await axios(options);
+
+    // Login successful
+    if (res.status === 200) {
+      // Redirect to application page
+      this.setState({
+        redirect: '/home'
+      });
+    }
+  }
+
   render() {
+    const { redirect } = this.state;
+
+    if (redirect !== null) {
+      return <Redirect to={redirect} />;
+    }
+
     return (
       <>
         <ContentContainer>
           <AppHeading>One Time Password</AppHeading>
           <AppSubHeading>Manager</AppSubHeading>
-          <LoginPanel />
+          <LoginPanel onSubmit={this.onSubmit} />
         </ContentContainer>
       </>
     );

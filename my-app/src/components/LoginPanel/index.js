@@ -1,9 +1,6 @@
-/* eslint-disable */
-
 import React from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
-import { Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import { colors, fonts } from '../../styleGuide';
 
@@ -78,8 +75,7 @@ class LoginPanel extends React.Component {
 
     this.state = {
       username: '',
-      password: '',
-      redirect: null
+      password: ''
     };
 
     this.onChange = this.onChange.bind(this);
@@ -92,29 +88,22 @@ class LoginPanel extends React.Component {
     });
   }
 
-  async onSubmit(e) {
+  onSubmit(e) {
     e.preventDefault();
 
-    const options = {
-      method: 'POST',
-      data: { username: this.state.username, password: this.state.password },
-      url: `${process.env.REACT_APP_API_URL}/accounts/login`
-    };
-    const res = await axios(options);
+    const { username, password } = this.state;
+    const { onSubmit } = this.props;
 
-    // Login successful
-    if (res.status == 200) {
-      // Redirect to application page
-      this.setState({
-        redirect: `/accounts/${res.data.id}`
-      });
-    }
+    const credential = {
+      username,
+      password
+    };
+
+    onSubmit(credential);
   }
 
   render() {
-    if (this.state.redirect != null) {
-      return <Redirect to={this.state.redirect} />;
-    }
+    const { username, password } = this.state;
 
     return (
       <Panel>
@@ -126,7 +115,7 @@ class LoginPanel extends React.Component {
             id="username"
             name="username"
             placeholder="Username"
-            value={this.state.username}
+            value={username}
             onChange={this.onChange}
           />
           <InputLabel htmlFor="password">Password</InputLabel>
@@ -135,7 +124,7 @@ class LoginPanel extends React.Component {
             id="password"
             name="password"
             placeholder="Password"
-            value={this.state.password}
+            value={password}
             onChange={this.onChange}
           />
           <LoginButton type="submit">Log In</LoginButton>
@@ -144,5 +133,9 @@ class LoginPanel extends React.Component {
     );
   }
 }
+
+LoginPanel.propTypes = {
+  onSubmit: PropTypes.func.isRequired
+};
 
 export default LoginPanel;
