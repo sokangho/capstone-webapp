@@ -1,8 +1,10 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { createGlobalStyle } from 'styled-components';
+
 import { colors } from '../../styleGuide';
 import LoginView from '../Login';
+import HomeView from '../Home';
 
 const GlobalBackgroundStyle = createGlobalStyle`
   html {
@@ -15,6 +17,10 @@ const App = () => {
     <>
       <GlobalBackgroundStyle />
       <Switch>
+        <Route path="/home">
+          <HomeView />
+        </Route>
+
         <Route path="/">
           <LoginView />
         </Route>
