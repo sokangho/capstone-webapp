@@ -53,7 +53,11 @@ class LoginView extends Component {
 
   async onSubmit(credential) {
     const res = await authenticationService.login(credential.username, credential.password);
-    return res;
+
+    if (res) {
+      const { from } = this.props.location.state || { from: { pathname: '/' } };
+      this.props.history.push('/');
+    }
   }
 
   render() {

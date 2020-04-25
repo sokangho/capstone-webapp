@@ -11,11 +11,18 @@ class HomeView extends Component {
     this.state = {
       currentUser: authenticationService.currentUser,
     };
+
+    this.logout = this.logout.bind(this);
   }
 
   componentDidMount() {
     const { document } = this.props;
     fontLoader(URL, document);
+  }
+
+  logout() {
+    authenticationService.logout();
+    this.props.history.push('/login');
   }
 
   render() {
@@ -24,6 +31,8 @@ class HomeView extends Component {
     return (
       <div>
         <h1>Hi {currentUser.userProfile.name}</h1>
+
+        <button onClick={this.logout}>Logout</button>
       </div>
     );
   }

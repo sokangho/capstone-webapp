@@ -20,7 +20,7 @@ async function login(username, password) {
 
   if (res.status === 200) {
     localStorage.setItem('currentUser', JSON.stringify(res.data));
-    return res.body;
+    return res.data;
   }
 
   return null;
@@ -28,4 +28,5 @@ async function login(username, password) {
 
 function logout() {
   localStorage.removeItem('currentUser');
+  console.log(localStorage.getItem('currentUser'));
 }
