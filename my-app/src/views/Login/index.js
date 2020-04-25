@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Redirect } from 'react-router-dom';
 
 import { fontUrls, colors, fonts } from '../../styleGuide';
 import fontLoader from '../../components/FontLoader';

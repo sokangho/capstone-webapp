@@ -5,6 +5,7 @@ import { createGlobalStyle } from 'styled-components';
 import { colors } from '../../styleGuide';
 import LoginView from '../Login';
 import HomeView from '../Home';
+import { PrivateRoute } from '../../components/PrivateRoute';
 
 const GlobalBackgroundStyle = createGlobalStyle`
   html {
@@ -18,10 +19,7 @@ const App = () => {
       <GlobalBackgroundStyle />
       <Switch>
         <Route exact path="/login" component={LoginView} />
-
-        <Route path="/">
-          <HomeView />
-        </Route>
+        <PrivateRoute path="/" component={HomeView} />
       </Switch>
     </>
   );
