@@ -4,7 +4,7 @@ export const authenticationService = {
   login,
   logout,
   get currentUser() {
-    return localStorage.getItem('currentUser');
+    return JSON.parse(localStorage.getItem('currentUser'));
   },
 };
 
@@ -29,7 +29,3 @@ async function login(username, password) {
 function logout() {
   localStorage.removeItem('currentUser');
 }
-
-// function getCurrentUser() {
-//   return localStorage.getItem('currentUser');
-// }
