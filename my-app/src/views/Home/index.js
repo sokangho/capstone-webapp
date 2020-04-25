@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import axios from "axios";
 
-import fontLoader from '../../components/FontLoader';
-import { authenticationService } from '../../services/authentication.service';
+import fontLoader from "../../components/FontLoader";
+import { authenticationService } from "../../services/authentication.service";
 
 class HomeView extends Component {
   constructor(props) {
@@ -10,19 +11,35 @@ class HomeView extends Component {
 
     this.state = {
       currentUser: authenticationService.currentUser,
+      applications: [],
     };
 
     this.logout = this.logout.bind(this);
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     const { document } = this.props;
     fontLoader(URL, document);
+
+    const applications = await this.getApplications();
+    this.setState({ applications });
+  }
+
+  async getApplications() {
+    const { currentUser } = this.state;
+
+    const options = {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+      url: `${process.env.REACT_APP_API_URL}/accounts/${currentUser.userProfile.id}/applications`,
+    };
+
+    return await axios(options);
   }
 
   logout() {
     authenticationService.logout();
-    this.props.history.push('/login');
+    this.props.history.push("/login");
   }
 
   render() {
