@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 
 import { fontUrls, colors, fonts } from '../../styleGuide';
 import fontLoader from '../../components/FontLoader';
 import LoginPanel from '../../components/LoginPanel';
+import { authenticationService } from '../../services/authentication.service';
 
 const ContentContainer = styled.div`
  max-width: 500px;
@@ -39,11 +39,12 @@ class LoginView extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      redirect: null
-    };
-
     this.onSubmit = this.onSubmit.bind(this);
+
+    // redirect to home if already logged in
+    if (authenticationService.currentUser) {
+      this.props.history.push('/');
+    }
   }
 
   componentDidMount() {
@@ -52,29 +53,11 @@ class LoginView extends Component {
   }
 
   async onSubmit(credential) {
-    const options = {
-      method: 'POST',
-      data: { username: credential.username, password: credential.password },
-      url: `${process.env.REACT_APP_API_URL}/accounts/login`
-    };
-    const res = await axios(options);
-
-    // Login successful
-    if (res.status === 200) {
-      // Redirect to application page
-      this.setState({
-        redirect: '/home'
-      });
-    }
+    const res = await authenticationService.login(credential.username, credential.password);
+    return res;
   }
 
   render() {
-    const { redirect } = this.state;
-
-    if (redirect !== null) {
-      return <Redirect to={redirect} />;
-    }
-
     return (
       <>
         <ContentContainer>
@@ -89,11 +72,11 @@ class LoginView extends Component {
 
 // Done to simply testing, can pass mocked document as prop
 LoginView.propTypes = {
-  document: PropTypes.object
+  document: PropTypes.object,
 };
 
 LoginView.defaultProps = {
-  document: window.document
+  document: window.document,
 };
 
 export default LoginView;

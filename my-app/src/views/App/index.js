@@ -17,12 +17,10 @@ const App = () => {
     <>
       <GlobalBackgroundStyle />
       <Switch>
-        <Route path="/home">
-          <HomeView />
-        </Route>
+        <Route exact path="/login" component={LoginView} />
 
         <Route path="/">
-          <LoginView />
+          <HomeView />
         </Route>
       </Switch>
     </>
