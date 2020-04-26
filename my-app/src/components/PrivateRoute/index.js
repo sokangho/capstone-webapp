@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
+import jwt from 'jsonwebtoken';
 
 import { authenticationService } from '../../services/authentication.service';
 
@@ -11,6 +12,13 @@ export const PrivateRoute = ({ component: Component, ...rest }) => (
 
       if (!currentUser) {
         // Not logged in, redirect to login page with the return url
+        return <Redirect to={{ pathname: '/login', state: { from: props.location } }} />;
+      }
+
+      const token = jwt.decode(currentUser.token);
+      if (token.exp < Date.now() / 1000) {
+        // Token expired, redirect to login page with the return url
+        authenticationService.logout();
         return <Redirect to={{ pathname: '/login', state: { from: props.location } }} />;
       }
 

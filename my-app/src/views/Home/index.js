@@ -1,9 +1,10 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import axios from "axios";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import axios from 'axios';
 
-import fontLoader from "../../components/FontLoader";
-import { authenticationService } from "../../services/authentication.service";
+import fontLoader from '../../components/FontLoader';
+import { authenticationService } from '../../services/authentication.service';
+import { authHeader } from '../../helpers/authHeader';
 
 class HomeView extends Component {
   constructor(props) {
@@ -22,15 +23,18 @@ class HomeView extends Component {
     fontLoader(URL, document);
 
     const applications = await this.getApplications();
-    this.setState({ applications });
+    // console.log(applications);
+    // this.setState({ applications });
   }
 
   async getApplications() {
     const { currentUser } = this.state;
 
     const options = {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${currentUser.token}`,
+      },
       url: `${process.env.REACT_APP_API_URL}/accounts/${currentUser.userProfile.id}/applications`,
     };
 
@@ -39,7 +43,7 @@ class HomeView extends Component {
 
   logout() {
     authenticationService.logout();
-    this.props.history.push("/login");
+    this.props.history.push('/login');
   }
 
   render() {
