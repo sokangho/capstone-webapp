@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import axios from 'axios';
-import { Redirect } from 'react-router-dom';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import styled from "styled-components";
+import axios from "axios";
+import { Redirect } from "react-router-dom";
 
-import { fontUrls, colors, fonts } from '../../styleGuide';
-import fontLoader from '../../components/FontLoader';
-import LoginPanel from '../../components/LoginPanel';
+import { fontUrls, colors, fonts } from "../../styleGuide";
+import fontLoader from "../../components/FontLoader";
+import LoginPanel from "../../components/LoginPanel";
 
 const ContentContainer = styled.div`
  max-width: 500px;
@@ -53,7 +53,7 @@ class LoginView extends Component {
 
   async onSubmit(credential) {
     const options = {
-      method: 'POST',
+      method: "POST",
       data: { username: credential.username, password: credential.password },
       url: `${process.env.REACT_APP_API_URL}/accounts/login`
     };
@@ -63,7 +63,7 @@ class LoginView extends Component {
     if (res.status === 200) {
       // Redirect to application page
       this.setState({
-        redirect: '/home'
+        redirect: "/home"
       });
     }
   }

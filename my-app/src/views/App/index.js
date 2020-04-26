@@ -1,10 +1,11 @@
-import React from 'react';
-import { Switch, Route } from 'react-router-dom';
-import { createGlobalStyle } from 'styled-components';
+import React from "react";
+import { Switch, Route } from "react-router-dom";
+import { createGlobalStyle } from "styled-components";
 
-import { colors } from '../../styleGuide';
-import LoginView from '../Login';
-import HomeView from '../Home';
+import { colors } from "../../styleGuide";
+import LoginView from "../Login";
+import HomeView from "../Home";
+import ApplicationDashboardView from "../ApplicationDashboard";
 
 const GlobalBackgroundStyle = createGlobalStyle`
   html {
@@ -20,7 +21,9 @@ const App = () => {
         <Route path="/home">
           <HomeView />
         </Route>
-
+        <Route path="/application-dashboard">
+          <ApplicationDashboardView />
+        </Route>
         <Route path="/">
           <LoginView />
         </Route>
