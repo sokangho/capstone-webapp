@@ -28,5 +28,4 @@ async function login(username, password) {
 
 function logout() {
   localStorage.removeItem('currentUser');
-  console.log(localStorage.getItem('currentUser'));
 }

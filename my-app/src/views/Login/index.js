@@ -56,7 +56,7 @@ class LoginView extends Component {
 
     if (res) {
       const { from } = this.props.location.state || { from: { pathname: '/' } };
-      this.props.history.push('/');
+      this.props.history.push(from);
     }
   }
 

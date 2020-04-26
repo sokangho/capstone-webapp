@@ -22,9 +22,8 @@ class HomeView extends Component {
     const { document } = this.props;
     fontLoader(URL, document);
 
-    const applications = await this.getApplications();
-    // console.log(applications);
-    // this.setState({ applications });
+    const res = await this.getApplications();
+    this.setState({ applications: res.data });
   }
 
   async getApplications() {
@@ -33,7 +32,8 @@ class HomeView extends Component {
     const options = {
       method: 'GET',
       headers: {
-        Authorization: `Bearer ${currentUser.token}`,
+        'Content-Type': 'application/json',
+        ...authHeader(),
       },
       url: `${process.env.REACT_APP_API_URL}/accounts/${currentUser.userProfile.id}/applications`,
     };
@@ -47,13 +47,24 @@ class HomeView extends Component {
   }
 
   render() {
-    const { currentUser } = this.state;
+    const { currentUser, applications } = this.state;
 
     return (
       <div>
         <h1>Hi {currentUser.userProfile.name}</h1>
 
         <button onClick={this.logout}>Logout</button>
+
+        <div>
+          {applications.map((app, index) => (
+            <div key={index}>
+              <span>{app.applicationName}</span>
+              <span>{app.otpLength}</span>
+              <span>{app.otpLifetime}</span>
+              <span>{app.modifiedDate}</span>
+            </div>
+          ))}
+        </div>
       </div>
     );
   }
