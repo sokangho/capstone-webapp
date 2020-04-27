@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import fontLoader from "../../components/FontLoader";
 import styled from "styled-components";
 import { fontUrls, colors, fonts } from "../../styleGuide";
-import OtpSettings from "../../components/OtpSettings";
+import Userlist from "../../components/UserList/UserList";
 
 const AppHeading = styled.h1`
   font-size: 30px;
@@ -13,9 +13,6 @@ const AppHeading = styled.h1`
   margin: 0px;
 `;
 
-const OtpPanel = styled(OtpSettings)`
-  margin: 200px;
-`;
 const ContentContainer = styled.div``;
 
 class ApplicationDashboardView extends Component {
@@ -29,7 +26,7 @@ class ApplicationDashboardView extends Component {
       <>
         <AppHeading>Application Dashboard</AppHeading>
         <ContentContainer>
-          <OtpPanel className="test" />
+          <Userlist></Userlist>
         </ContentContainer>
       </>
     );
@@ -38,11 +35,11 @@ class ApplicationDashboardView extends Component {
 
 // Done to simply testing, can pass mocked document as prop
 ApplicationDashboardView.propTypes = {
-  document: PropTypes.object
+  document: PropTypes.object,
 };
 
 ApplicationDashboardView.defaultProps = {
-  document: window.document
+  document: window.document,
 };
 
 export default ApplicationDashboardView;
