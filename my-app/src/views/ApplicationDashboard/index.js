@@ -26,7 +26,9 @@ class ApplicationDashboardView extends Component {
       <>
         <AppHeading>Application Dashboard</AppHeading>
         <ContentContainer>
-          <Userlist></Userlist>
+          <Userlist
+            applicationId={this.props.match.params.applicationId}
+          ></Userlist>
         </ContentContainer>
       </>
     );
