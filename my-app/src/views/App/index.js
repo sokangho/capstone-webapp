@@ -5,10 +5,14 @@ import { createGlobalStyle } from 'styled-components';
 import { colors } from '../../styleGuide';
 import LoginView from '../Login';
 import HomeView from '../Home';
+import AppListView from '../AppList';
 
 const GlobalBackgroundStyle = createGlobalStyle`
   html {
     background-color: ${colors.background}
+  }
+  body {
+    margin: 0px;
   }
 `;
 
@@ -17,11 +21,13 @@ const App = () => {
     <>
       <GlobalBackgroundStyle />
       <Switch>
+        <Route path="/applications">
+          <AppListView />
+        </Route>
         <Route path="/home">
           <HomeView />
         </Route>
-
-        <Route path="/">
+        <Route path="/">  
           <LoginView />
         </Route>
       </Switch>

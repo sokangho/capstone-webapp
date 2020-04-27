@@ -87,11 +87,11 @@ class LoginView extends Component {
   }
 }
 
-// Done to simply testing, can pass mocked document as prop
 LoginView.propTypes = {
   document: PropTypes.object
 };
 
+// Done to simply testing, can pass mocked document as prop
 LoginView.defaultProps = {
   document: window.document
 };

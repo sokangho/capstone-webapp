@@ -14,11 +14,11 @@ class HomeView extends Component {
   }
 }
 
-// Done to simply testing, can pass mocked document as prop
 HomeView.propTypes = {
   document: PropTypes.object
 };
 
+// Done to simply testing, can pass mocked document as prop
 HomeView.defaultProps = {
   document: window.document
 };

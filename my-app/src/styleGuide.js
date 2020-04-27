@@ -4,7 +4,8 @@ const colorCodes = {
   silver: '#C0C0C0',
   gray: '#808080',
   black: '#000000',
-  white: '#FFFFFF'
+  white: '#FFFFFF',
+  lightgray: '#D3D3D3'
 };
 
 export const colors = {
@@ -13,7 +14,8 @@ export const colors = {
   subHeading: colorCodes.gray,
   borderLight: colorCodes.silver,
   darkText: colorCodes.black,
-  primaryWhite: colorCodes.white
+  primaryWhite: colorCodes.white,
+  headerBackground: colorCodes.lightgray
 };
 
 export const fontUrls = {
