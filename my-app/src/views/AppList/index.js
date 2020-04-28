@@ -8,18 +8,18 @@ const HeaderContainer = styled.div`
   background-color: ${colors.headerBackground};
   padding: 0px 50px;
   border: 1px solid ${colors.borderLight};
-`
+`;
 
 const HeaderTitle = styled.h1`
   font-family: ${fonts.robotoSlab};
   font-size: 30px;
   font-weight: 400px;
   color: ${colors.darkText};
-`
+`;
 
 const ButtonContainer = styled.div`
   padding: 0px 60px;
-`
+`;
 
 const AddApplicationButton = styled.button`
   display: block;
@@ -44,12 +44,13 @@ class AppList extends React.Component {
   render() {
     return (
       <>
-      <HeaderContainer><HeaderTitle>Applications</HeaderTitle></HeaderContainer>
-      <ButtonContainer><AddApplicationButton>Add Application</AddApplicationButton></ButtonContainer>
+        <HeaderContainer><HeaderTitle>Applications</HeaderTitle></HeaderContainer>
+        <ButtonContainer>
+          <AddApplicationButton>Add Application</AddApplicationButton>
+        </ButtonContainer>
       </>
     );
   }
-  
 }
 
 export default AppList;
