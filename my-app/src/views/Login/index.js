@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { fontUrls, colors, fonts } from '../../styleGuide';
 import fontLoader from '../../components/FontLoader';
 import LoginPanel from '../../components/LoginPanel';
-import { authenticationService } from '../../services/authentication.service';
+import authenticationService from '../../services/authentication.service';
 
 const ContentContainer = styled.div`
  max-width: 500px;
@@ -42,7 +42,7 @@ class LoginView extends Component {
 
     // redirect to home if already logged in
     if (authenticationService.currentUser) {
-      this.props.history.push('/');
+      props.history.push('/');
     }
   }
 
@@ -52,11 +52,12 @@ class LoginView extends Component {
   }
 
   async onSubmit(credential) {
+    const { location, history } = this.props;
     const res = await authenticationService.login(credential.username, credential.password);
 
     if (res) {
-      const { from } = this.props.location.state || { from: { pathname: '/' } };
-      this.props.history.push(from);
+      const { from } = location.state || { from: { pathname: '/' } };
+      history.push(from);
     }
   }
 
@@ -73,13 +74,15 @@ class LoginView extends Component {
   }
 }
 
-// Done to simply testing, can pass mocked document as prop
 LoginView.propTypes = {
   document: PropTypes.object,
+  location: PropTypes.object,
+  history: PropTypes.object
 };
 
+// Done to simply testing, can pass mocked document as prop
 LoginView.defaultProps = {
-  document: window.document,
+  document: window.document
 };
 
 export default LoginView;

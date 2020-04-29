@@ -1,13 +1,12 @@
-import { authenticationService } from '../services/authentication.service';
+import authenticationService from '../services/authentication.service';
 
-export function authHeader() {
-  const currentUser = authenticationService.currentUser;
+export default function authHeader() {
+  const { currentUser } = authenticationService;
 
   if (currentUser && currentUser.token) {
     return {
-      Authorization: `Bearer ${currentUser.token}`,
+      Authorization: `Bearer ${currentUser.token}`
     };
-  } else {
-    return {};
   }
+  return {};
 }

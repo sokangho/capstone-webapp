@@ -5,11 +5,14 @@ import { createGlobalStyle } from 'styled-components';
 import { colors } from '../../styleGuide';
 import LoginView from '../Login';
 import HomeView from '../Home';
-import { PrivateRoute } from '../../components/PrivateRoute';
+import PrivateRoute from '../../components/PrivateRoute';
 
 const GlobalBackgroundStyle = createGlobalStyle`
   html {
     background-color: ${colors.background}
+  }
+  body {
+    margin: 0px;
   }
 `;
 

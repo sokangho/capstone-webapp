@@ -2,13 +2,13 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import jwt from 'jsonwebtoken';
 
-import { authenticationService } from '../../services/authentication.service';
+import authenticationService from '../../services/authentication.service';
 
-export const PrivateRoute = ({ component: Component, ...rest }) => (
+const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
-    render={(props) => {
-      const currentUser = authenticationService.currentUser;
+    render={props => {
+      const { currentUser } = authenticationService;
 
       if (!currentUser) {
         // Not logged in, redirect to login page with the return url
@@ -27,3 +27,5 @@ export const PrivateRoute = ({ component: Component, ...rest }) => (
     }}
   />
 );
+
+export default PrivateRoute;
