@@ -3,7 +3,7 @@ import authHeader from '../helpers/authHeader';
 import authenticationService from './authentication.service';
 
 const getApplications = async () => {
-  const currentUser = authenticationService.currentUser;
+  const { currentUser } = authenticationService;
   const options = {
     method: 'GET',
     headers: {
