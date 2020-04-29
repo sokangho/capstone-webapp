@@ -2,7 +2,7 @@ import axios from 'axios';
 
 function logout() {
   localStorage.removeItem('currentUser');
-}
+};
 
 async function login(username, password) {
   const options = {
@@ -20,7 +20,7 @@ async function login(username, password) {
   }
 
   return null;
-}
+};
 
 const authenticationService = {
   login,

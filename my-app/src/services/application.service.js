@@ -1,8 +1,9 @@
 import axios from 'axios';
 import authHeader from '../helpers/authHeader';
+import authenticationService from './authentication.service';
 
 const getApplications = async () => {
-  const { currentUser } = this.state;
+  const currentUser = authenticationService.currentUser;
   const options = {
     method: 'GET',
     headers: {
