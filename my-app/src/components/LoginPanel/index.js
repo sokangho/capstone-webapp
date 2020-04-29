@@ -50,9 +50,9 @@ const InputBox = styled.input`
   width: 250px;
   height: 30px;
   margin: 5px auto 20px;
+  padding-left: 10px;
 
   &::placeholder {
-    padding-left: 5px;
     font-family: ${fonts.robotoSlab};
     font-size: 14px;
   }
@@ -135,7 +135,7 @@ class LoginPanel extends React.Component {
 }
 
 LoginPanel.propTypes = {
-  onSubmit: PropTypes.func.isRequired
+  onSubmit: PropTypes.func
 };
 
 export default LoginPanel;

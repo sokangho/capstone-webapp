@@ -30,7 +30,8 @@ module.exports = {
     'arrow-body-style': 'off',
     'arrow-parens': ['error', 'as-needed'],
     "import/no-extraneous-dependencies": ["error", {"devDependencies": ["**/*.test.js", "./src/setupTests.js"]}],
-    "react/forbid-prop-types": 'off'
+    "react/forbid-prop-types": 'off',
+    "react/require-default-props": 'off'
   },
 
 };

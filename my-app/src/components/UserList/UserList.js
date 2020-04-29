@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import axios from "axios";
-import { authHeader } from "../../helpers/authHeader";
 import { authenticationService } from "../../services/authentication.service";
 import { fontUrls, colors, fonts } from "../../styleGuide";
 import fontLoader from "../../components/FontLoader";
+import { authHeader } from "../../helpers/authHeader";
 
 const UserTable = styled.table`
   background-color: ${colors.primaryWhite};
