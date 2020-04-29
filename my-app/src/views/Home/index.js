@@ -78,22 +78,17 @@ class HomeView extends Component {
   render() {
     // This is being mocked for now as unable to connect backend locally
     const { applications } = this.state;
-    const applicationsMock = [{
-      id: '1', name: 'Application 1', description: 'Very good app', users: '0'
-    }, {
-      id: '2', name: 'Application 2', description: 'Not so good app', users: '44'
-    }, {
-      id: '3', name: 'Application 3', description: 'Amazing app', users: '12'
-    }];
 
     return (
       <>
-        <TitleContainer><AppListTitle>Applications</AppListTitle></TitleContainer>
+        <TitleContainer>
+          <AppListTitle>Applications</AppListTitle>
+        </TitleContainer>
         <MainContentContainer>
           <ButtonContainer>
             <AddApplicationButton>Add Application</AddApplicationButton>
           </ButtonContainer>
-          <ApplicationTable applications={applicationsMock} />
+          <ApplicationTable applications={applications} />
         </MainContentContainer>
       </>
     );

@@ -9,7 +9,7 @@ const AppListTable = styled.table`
   font-family: ${fonts.robotoSlab};
   border-collapse: collapse;
   box-shadow: 0px 0px 10px ${colorCodes.gray};
-  
+
   thead {
     border: 1px solid ${colorCodes.silver};
     background-color: ${colors.primaryWhite};
@@ -51,11 +51,10 @@ const AppListTable = styled.table`
 
   .app_users {
     padding: 10px 100px;
-
   }
 
   .app_desc {
-    padding: 10px 200px
+    padding: 10px 200px;
   }
 `;
 
@@ -73,9 +72,9 @@ const ApplicationTable = props => {
         {applications.map(app => (
           <tr key={app.id}>
             <td className="app_id">{app.id}</td>
-            <td className="app_name">{app.name}</td>
-            <td className="app_desc">{app.description}</td>
-            <td className="app_users">{app.users}</td>
+            <td className="app_name">{app.applicationName}</td>
+            <td className="app_desc">{app.applicationDescription}</td>
+            <td className="app_users">{app.applicationusers ? app.applicationusers.length : 0}</td>
           </tr>
         ))}
       </tbody>
