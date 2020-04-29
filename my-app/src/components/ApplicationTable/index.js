@@ -63,10 +63,12 @@ const ApplicationTable = props => {
   return (
     <AppListTable>
       <thead>
-        <th className="app_id">ID</th>
-        <th className="app_name">Name</th>
-        <th className="app_desc">Description</th>
-        <th className="app_users">Active Users</th>
+        <tr>
+          <th className="app_id">ID</th>
+          <th className="app_name">Name</th>
+          <th className="app_desc">Description</th>
+          <th className="app_users">Active Users</th>
+        </tr>
       </thead>
       <tbody>
         {applications.map(app => (
