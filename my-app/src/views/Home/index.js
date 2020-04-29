@@ -76,7 +76,6 @@ class HomeView extends Component {
   }
 
   render() {
-    // This is being mocked for now as unable to connect backend locally
     const { applications } = this.state;
 
     return (
