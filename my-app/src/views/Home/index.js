@@ -5,14 +5,7 @@ import axios from "axios";
 import fontLoader from "../../components/FontLoader";
 import { authenticationService } from "../../services/authentication.service";
 import { authHeader } from "../../helpers/authHeader";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  useRouteMatch,
-  useParams,
-} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 class HomeView extends Component {
   constructor(props) {

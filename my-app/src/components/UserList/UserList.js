@@ -1,15 +1,27 @@
 import React, { Component } from "react";
+import styled from "styled-components";
 import axios from "axios";
 import { authHeader } from "../../helpers/authHeader";
 import { authenticationService } from "../../services/authentication.service";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  useRouteMatch,
-  useParams,
-} from "react-router-dom";
+import { fontUrls, colors, fonts } from "../../styleGuide";
+import fontLoader from "../../components/FontLoader";
+
+const UserTable = styled.table`
+  background-color: ${colors.primaryWhite};
+  font-family: ${fonts.robotoSlab};
+`;
+
+const AppSubHeading = styled.h2`
+  font-size: 26px;
+  font-family: ${fonts.robotoSlab};
+  font-weight: 300;
+  color: ${colors.subHeading};
+  margin: 0px;
+`;
+const StyledCell = styled.td`
+  padding: 10px 200px 10px 20px;
+`;
+const URL = fontUrls.robotoSlab;
 
 class UserList extends Component {
   constructor(props) {
@@ -22,11 +34,9 @@ class UserList extends Component {
   }
 
   async componentDidMount() {
-    console.log(this.props.applicationId);
-
     const res = await this.getUsers();
-    console.log(res);
     this.setState({ users: res.data });
+    fontLoader(URL, document);
   }
   async getUsers() {
     const id = this.props.applicationId;
@@ -43,13 +53,13 @@ class UserList extends Component {
 
   renderTableData() {
     return this.state.users.map((user, index) => {
-      const { id, applicationId, email, username } = user;
+      const { id, mobileNumber, email, username } = user;
       return (
         <tr key={id}>
-          <td>{id}</td>
-          <td>{applicationId}</td>
-          <td>{email}</td>
-          <td>{username}</td>
+          <StyledCell>{id}</StyledCell>
+          <StyledCell>{username}</StyledCell>
+          <StyledCell>{email}</StyledCell>
+          <StyledCell>{mobileNumber}</StyledCell>
         </tr>
       );
     });
@@ -58,10 +68,10 @@ class UserList extends Component {
   renderTableHeader() {
     return (
       <tr>
-        <td>Id</td>
-        <td>Application Id</td>
-        <td>Email</td>
-        <td>Username</td>
+        <StyledCell>Id</StyledCell>
+        <StyledCell>Username</StyledCell>
+        <StyledCell>Email</StyledCell>
+        <StyledCell>Mobile</StyledCell>
       </tr>
     );
   }
@@ -69,13 +79,13 @@ class UserList extends Component {
   render() {
     return (
       <div>
-        <h1 id="title">User List</h1>
-        <table id="users">
+        <AppSubHeading>User List</AppSubHeading>
+        <UserTable>
           <tbody>
             {this.renderTableHeader()}
             {this.renderTableData()}
           </tbody>
-        </table>
+        </UserTable>
       </div>
     );
   }
