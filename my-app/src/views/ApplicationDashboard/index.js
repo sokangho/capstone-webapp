@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Userlist from "../../components/UserList/UserList";
 import Header from "../../components/StyledComponents/StyledHeader";
 import { fontUrls } from "../../styleGuide";
+import { Link } from "react-router-dom";
 
 const ContentContainer = styled.div`
   margin-left: 60px;
@@ -20,6 +21,7 @@ class ApplicationDashboardView extends Component {
       <div>
         <Header title={applicationName + " Dashboard"} />
         <ContentContainer>
+          <Link to="/">Back</Link>
           <Userlist
             applicationId={this.props.match.params.applicationId}
           ></Userlist>
