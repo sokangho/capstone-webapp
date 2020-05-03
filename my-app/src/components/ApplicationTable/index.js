@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
-import { colors, fonts, colorCodes } from "../../styleGuide";
+import { colorCodes } from "../../styleGuide";
 import { Link } from "react-router-dom";
 import StyledTable from "../../components/StyledComponents/StyledTable";
 

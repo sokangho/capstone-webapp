@@ -3,6 +3,7 @@ import fontLoader from "../../components/FontLoader";
 import styled from "styled-components";
 import Userlist from "../../components/UserList/UserList";
 import Header from "../../components/StyledComponents/StyledHeader";
+import { fontUrls } from "../../styleGuide";
 
 const ContentContainer = styled.div`
   margin-left: 60px;
@@ -10,8 +11,7 @@ const ContentContainer = styled.div`
 
 class ApplicationDashboardView extends Component {
   componentDidMount() {
-    const { document } = this.props;
-    fontLoader(URL, document);
+    fontLoader(fontUrls.robotoSlab, document);
   }
 
   render() {

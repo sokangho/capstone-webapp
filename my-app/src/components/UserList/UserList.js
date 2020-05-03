@@ -16,8 +16,9 @@ const AppSubHeading = styled.h2`
   padding-top: 20px;
   padding-bottom: 20px;
 `;
-const UserTable = styled(StyledTable)`
-  ${UserTable} td, ${UserTable} th {
+const TableContainer = styled.div`
+  ${StyledTable} td,
+  ${StyledTable} th {
     padding: 10px 200px 10px 20px;
   }
 `;
@@ -78,10 +79,12 @@ class UserList extends Component {
     return (
       <div>
         <AppSubHeading>User List</AppSubHeading>
-        <UserTable>
-          <thead>{this.renderTableHeader()}</thead>
-          <tbody>{this.renderTableData()}</tbody>
-        </UserTable>
+        <TableContainer>
+          <StyledTable>
+            <thead>{this.renderTableHeader()}</thead>
+            <tbody>{this.renderTableData()}</tbody>
+          </StyledTable>
+        </TableContainer>
       </div>
     );
   }

@@ -1,13 +1,13 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
-import styled from "styled-components";
-import fontLoader from "../../components/FontLoader";
-import ApplicationTable from "../../components/ApplicationTable";
-import authenticationService from "../../services/authentication.service";
-import applicationService from "../../services/application.service";
+import styled from 'styled-components';
+import fontLoader from '../../components/FontLoader';
+import ApplicationTable from '../../components/ApplicationTable';
+import authenticationService from '../../services/authentication.service';
+import applicationService from '../../services/application.service';
 
-import { fontUrls, fonts, colors } from "../../styleGuide";
+import { fontUrls, fonts, colors } from '../../styleGuide';
 
 const TitleContainer = styled.div`
   display: flex;
@@ -55,7 +55,7 @@ class HomeView extends Component {
     this.state = {
       // Will pass this as a prop to header
       // currentUser: authenticationService.currentUser,
-      applications: [],
+      applications: []
     };
 
     this.logout = this.logout.bind(this);
@@ -72,7 +72,7 @@ class HomeView extends Component {
   logout() {
     const { history } = this.props;
     authenticationService.logout();
-    history.push("/login");
+    history.push('/login');
   }
 
   render() {
@@ -96,12 +96,12 @@ class HomeView extends Component {
 
 HomeView.propTypes = {
   document: PropTypes.object,
-  history: PropTypes.object,
+  history: PropTypes.object
 };
 
 // Done to simply testing, can pass mocked document as prop
 HomeView.defaultProps = {
-  document: window.document,
+  document: window.document
 };
 
 export default HomeView;
