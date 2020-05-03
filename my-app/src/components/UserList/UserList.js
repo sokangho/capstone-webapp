@@ -51,7 +51,7 @@ class UserList extends Component {
   }
 
   renderTableData() {
-    return this.state.users.map((user, index) => {
+    return this.state.users.map((user) => {
       const { id, mobileNumber, email, username } = user;
       return (
         <tr key={id}>
