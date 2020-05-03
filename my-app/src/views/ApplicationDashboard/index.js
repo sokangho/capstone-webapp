@@ -1,19 +1,12 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import fontLoader from "../../components/FontLoader";
 import styled from "styled-components";
-import { fontUrls, colors, fonts } from "../../styleGuide";
 import Userlist from "../../components/UserList/UserList";
+import Header from "../../components/StyledComponents/StyledHeader";
 
-const AppHeading = styled.h1`
-  font-size: 30px;
-  font-family: ${fonts.robotoSlab};
-  font-weight: 600;
-  color: ${colors.subHeading};
-  margin: 0px;
+const ContentContainer = styled.div`
+  margin-left: 60px;
 `;
-
-const ContentContainer = styled.div``;
 
 class ApplicationDashboardView extends Component {
   componentDidMount() {
@@ -22,26 +15,18 @@ class ApplicationDashboardView extends Component {
   }
 
   render() {
+    const { applicationName } = this.props.location.state;
     return (
-      <>
-        <AppHeading>Application Dashboard</AppHeading>
+      <div>
+        <Header title={applicationName + " Dashboard"} />
         <ContentContainer>
           <Userlist
             applicationId={this.props.match.params.applicationId}
           ></Userlist>
         </ContentContainer>
-      </>
+      </div>
     );
   }
 }
-
-// Done to simply testing, can pass mocked document as prop
-ApplicationDashboardView.propTypes = {
-  document: PropTypes.object,
-};
-
-ApplicationDashboardView.defaultProps = {
-  document: window.document,
-};
 
 export default ApplicationDashboardView;

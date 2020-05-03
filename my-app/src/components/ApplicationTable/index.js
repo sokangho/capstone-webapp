@@ -3,42 +3,10 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 import { colors, fonts, colorCodes } from "../../styleGuide";
 import { Link } from "react-router-dom";
+import StyledTable from "../../components/StyledComponents/StyledTable";
 
-const AppListTable = styled.table`
+const AppListTable = styled(StyledTable)`
   margin: 0px auto;
-  text-align: center;
-  font-family: ${fonts.robotoSlab};
-  border-collapse: collapse;
-  box-shadow: 0px 0px 10px ${colorCodes.gray};
-
-  thead {
-    border: 1px solid ${colorCodes.silver};
-    background-color: ${colors.primaryWhite};
-    box-shadow: 0px 0px 3px ${colors.borderLight};
-  }
-
-  tbody {
-    background-color: ${colors.headerBackground};
-  }
-
-  th {
-    font-weight: 500;
-    color: #696969;
-  }
-
-  td {
-    font-weight: 300;
-    color: #696969;
-  }
-
-  tr {
-    box-shadow: 0px 0px 3px ${colors.borderLight};
-    border: 1px solid ${colorCodes.silver};
-  }
-
-  tr:nth-child(even) {
-    background-color: ${colors.primaryWhite};
-  }
 
   .app_id {
     padding: 10px 50px;
@@ -76,7 +44,14 @@ const ApplicationTable = (props) => {
           <tr key={app.id}>
             <td className="app_id">{app.id}</td>
             <td className="app_name">
-              <Link to={`application-dashboard/${app.id}`}>
+              <Link
+                to={{
+                  pathname: `application-dashboard/${app.id}`,
+                  state: {
+                    applicationName: app.applicationName,
+                  },
+                }}
+              >
                 {app.applicationName}
               </Link>
             </td>

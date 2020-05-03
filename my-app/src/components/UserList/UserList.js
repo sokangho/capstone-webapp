@@ -1,32 +1,30 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import axios from "axios";
-import { authenticationService } from "../../services/authentication.service";
+import authenticationService from "../../services/authentication.service";
 import { fontUrls, colors, fonts } from "../../styleGuide";
 import fontLoader from "../../components/FontLoader";
-import { authHeader } from "../../helpers/authHeader";
-
-const UserTable = styled.table`
-  background-color: ${colors.primaryWhite};
-  font-family: ${fonts.robotoSlab};
-`;
+import authHeader from "../../helpers/authHeader";
+import StyledTable from "../../components/StyledComponents/StyledTable";
 
 const AppSubHeading = styled.h2`
   font-size: 26px;
   font-family: ${fonts.robotoSlab};
   font-weight: 300;
-  color: ${colors.subHeading};
+  color: ${colors.darkText};
   margin: 0px;
+  padding-top: 20px;
+  padding-bottom: 20px;
 `;
-const StyledCell = styled.td`
-  padding: 10px 200px 10px 20px;
+const UserTable = styled(StyledTable)`
+  ${UserTable} td, ${UserTable} th {
+    padding: 10px 200px 10px 20px;
+  }
 `;
-const URL = fontUrls.robotoSlab;
 
 class UserList extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       currentUser: authenticationService.currentUser,
       users: [],
@@ -36,7 +34,7 @@ class UserList extends Component {
   async componentDidMount() {
     const res = await this.getUsers();
     this.setState({ users: res.data });
-    fontLoader(URL, document);
+    fontLoader(fontUrls.robotoSlab, document);
   }
   async getUsers() {
     const id = this.props.applicationId;
@@ -56,10 +54,10 @@ class UserList extends Component {
       const { id, mobileNumber, email, username } = user;
       return (
         <tr key={id}>
-          <StyledCell>{id}</StyledCell>
-          <StyledCell>{username}</StyledCell>
-          <StyledCell>{email}</StyledCell>
-          <StyledCell>{mobileNumber}</StyledCell>
+          <td>{id}</td>
+          <td>{username}</td>
+          <td>{email}</td>
+          <td>{mobileNumber}</td>
         </tr>
       );
     });
@@ -68,10 +66,10 @@ class UserList extends Component {
   renderTableHeader() {
     return (
       <tr>
-        <StyledCell>Id</StyledCell>
-        <StyledCell>Username</StyledCell>
-        <StyledCell>Email</StyledCell>
-        <StyledCell>Mobile</StyledCell>
+        <th>Id</th>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Mobile</th>
       </tr>
     );
   }
@@ -81,10 +79,8 @@ class UserList extends Component {
       <div>
         <AppSubHeading>User List</AppSubHeading>
         <UserTable>
-          <tbody>
-            {this.renderTableHeader()}
-            {this.renderTableData()}
-          </tbody>
+          <thead>{this.renderTableHeader()}</thead>
+          <tbody>{this.renderTableData()}</tbody>
         </UserTable>
       </div>
     );
