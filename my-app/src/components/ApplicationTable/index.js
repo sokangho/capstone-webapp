@@ -1,9 +1,9 @@
-import React from "react";
-import styled from "styled-components";
-import PropTypes from "prop-types";
-import { colorCodes } from "../../styleGuide";
-import { Link } from "react-router-dom";
-import StyledTable from "../../components/StyledComponents/StyledTable";
+import React from 'react';
+import styled from 'styled-components';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import { colorCodes } from '../../styleGuide';
+import StyledTable from '../StyledComponents/StyledTable';
 
 const AppListTable = styled(StyledTable)`
   margin: 0px auto;
@@ -27,7 +27,7 @@ const AppListTable = styled(StyledTable)`
   }
 `;
 
-const ApplicationTable = (props) => {
+const ApplicationTable = props => {
   const { applications } = props;
   return (
     <AppListTable>
@@ -40,7 +40,7 @@ const ApplicationTable = (props) => {
         </tr>
       </thead>
       <tbody>
-        {applications.map((app) => (
+        {applications.map(app => (
           <tr key={app.id}>
             <td className="app_id">{app.id}</td>
             <td className="app_name">
@@ -48,8 +48,8 @@ const ApplicationTable = (props) => {
                 to={{
                   pathname: `application-dashboard/${app.id}`,
                   state: {
-                    applicationName: app.applicationName,
-                  },
+                    applicationName: app.applicationName
+                  }
                 }}
               >
                 {app.applicationName}
@@ -67,11 +67,11 @@ const ApplicationTable = (props) => {
 };
 
 ApplicationTable.propTypes = {
-  applications: PropTypes.array,
+  applications: PropTypes.array
 };
 
 ApplicationTable.defaultProps = {
-  applications: [],
+  applications: []
 };
 
 export default ApplicationTable;

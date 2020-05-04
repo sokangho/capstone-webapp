@@ -1,10 +1,11 @@
-import React, { Component } from "react";
-import fontLoader from "../../components/FontLoader";
-import styled from "styled-components";
-import Userlist from "../../components/UserList/UserList";
-import Header from "../../components/StyledComponents/StyledHeader";
-import { fontUrls } from "../../styleGuide";
-import { Link } from "react-router-dom";
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+import PropTypes from 'prop-types';
+import fontLoader from '../../components/FontLoader';
+import Userlist from '../../components/UserList/UserList';
+import Header from '../../components/StyledComponents/StyledHeader';
+import { fontUrls } from '../../styleGuide';
 
 const ContentContainer = styled.div`
   margin-left: 60px;
@@ -16,19 +17,26 @@ class ApplicationDashboardView extends Component {
   }
 
   render() {
-    const { applicationName } = this.props.location.state;
+    const { location, match } = this.props;
+    const { applicationName } = location.state;
+    const { applicationId } = match.params;
     return (
       <div>
-        <Header title={applicationName + " Dashboard"} />
+        <Header title={`${applicationName} Dashboard`} />
         <ContentContainer>
           <Link to="/">Back</Link>
           <Userlist
-            applicationId={this.props.match.params.applicationId}
-          ></Userlist>
+            applicationId={applicationId}
+          />
         </ContentContainer>
       </div>
     );
   }
 }
+
+ApplicationDashboardView.propTypes = {
+  match: PropTypes.object,
+  location: PropTypes.object
+};
 
 export default ApplicationDashboardView;

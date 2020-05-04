@@ -1,6 +1,7 @@
-import { fonts, colors } from "../../styleGuide";
-import styled from "styled-components";
-import React from "react";
+import PropTypes from 'prop-types';
+import React from 'react';
+import styled from 'styled-components';
+import { fonts, colors } from '../../styleGuide';
 
 const HeaderContainer = styled.div`
   display: flex;
@@ -16,10 +17,17 @@ const HeaderTitle = styled.h1`
   color: ${colors.darkText};
 `;
 
-const Header = (props) => (
-  <HeaderContainer>
-    <HeaderTitle>{props.title}</HeaderTitle>
-  </HeaderContainer>
-);
+const Header = props => {
+  const { title } = props;
+  return (
+    <HeaderContainer>
+      <HeaderTitle>{title}</HeaderTitle>
+    </HeaderContainer>
+  );
+};
+
+Header.propTypes = {
+  title: PropTypes.string
+};
 
 export default Header;

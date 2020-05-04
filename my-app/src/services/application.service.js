@@ -1,13 +1,13 @@
-import axios from 'axios';
-import authHeader from '../helpers/authHeader';
-import authenticationService from './authentication.service';
+import axios from "axios";
+import authHeader from "../helpers/authHeader";
+import authenticationService from "./authentication.service";
 
 const getApplications = async () => {
   const { currentUser } = authenticationService;
   const options = {
-    method: 'GET',
+    method: "GET",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
       ...authHeader()
     },
     url: `${process.env.REACT_APP_API_URL}/accounts/${currentUser.userProfile.id}/applications`
@@ -15,8 +15,20 @@ const getApplications = async () => {
   return axios(options);
 };
 
-const applicationService = {
-  getApplications
+const getUsers = async id => {
+  const options = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      ...authHeader()
+    },
+    url: `${process.env.REACT_APP_API_URL}/applications/${id}/applicationusers`
+  };
+  return axios(options);
 };
 
+const applicationService = {
+  getApplications,
+  getUsers
+};
 export default applicationService;

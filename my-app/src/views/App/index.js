@@ -6,7 +6,7 @@ import { colors } from "../../styleGuide";
 import LoginView from "../Login";
 import HomeView from "../Home";
 import PrivateRoute from "../../components/PrivateRoute";
-import ApplicationDashboardView from "../../views/ApplicationDashboard";
+import ApplicationDashboardView from "../ApplicationDashboard";
 
 const GlobalBackgroundStyle = createGlobalStyle`
   html {

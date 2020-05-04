@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { colors, fonts, colorCodes } from "../../styleGuide";
+import styled from 'styled-components';
+import { colors, fonts, colorCodes } from '../../styleGuide';
 
 const StyledTable = styled.table`
   text-align: center;
