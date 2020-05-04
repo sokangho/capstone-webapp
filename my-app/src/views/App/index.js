@@ -1,12 +1,12 @@
-import React from "react";
-import { Switch, Route } from "react-router-dom";
-import { createGlobalStyle } from "styled-components";
+import React from 'react';
+import { Switch, Route } from 'react-router-dom';
+import { createGlobalStyle } from 'styled-components';
 
-import { colors } from "../../styleGuide";
-import LoginView from "../Login";
-import HomeView from "../Home";
-import PrivateRoute from "../../components/PrivateRoute";
-import ApplicationDashboardView from "../ApplicationDashboard";
+import { colors } from '../../styleGuide';
+import LoginView from '../Login';
+import HomeView from '../Home';
+import PrivateRoute from '../../components/PrivateRoute';
+import ApplicationDashboardView from '../ApplicationDashboard';
 
 const GlobalBackgroundStyle = createGlobalStyle`
   html {
