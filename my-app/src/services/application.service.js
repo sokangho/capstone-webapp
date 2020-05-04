@@ -8,27 +8,27 @@ const getApplications = async () => {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-      ...authHeader(),
+      ...authHeader()
     },
-    url: `${process.env.REACT_APP_API_URL}/accounts/${currentUser.userProfile.id}/applications`,
+    url: `${process.env.REACT_APP_API_URL}/accounts/${currentUser.userProfile.id}/applications`
   };
   return axios(options);
 };
 
-const getUsers = async (id) => {
+const getUsers = async id => {
   const options = {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-      ...authHeader(),
+      ...authHeader()
     },
-    url: `${process.env.REACT_APP_API_URL}/applications/${id}/applicationusers`,
+    url: `${process.env.REACT_APP_API_URL}/applications/${id}/applicationusers`
   };
   return axios(options);
 };
 
 const applicationService = {
   getApplications,
-  getUsers,
+  getUsers
 };
 export default applicationService;

@@ -1,8 +1,8 @@
-import React from "react";
-import styled from "styled-components";
-import fontLoader from "../../components/FontLoader";
-import { fontUrls, fonts, colors } from "../../styleGuide";
-import Header from "../../components/StyledComponents/StyledHeader";
+import React from 'react';
+import styled from 'styled-components';
+import fontLoader from '../../components/FontLoader';
+import { fontUrls, fonts, colors } from '../../styleGuide';
+import Header from '../../components/StyledComponents/StyledHeader';
 
 const ButtonContainer = styled.div`
   padding: 0px 60px;
