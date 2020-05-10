@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import jwt from 'jsonwebtoken';
+import PropTypes from 'prop-types';
 
 import authenticationService from '../../services/authentication.service';
 
@@ -27,5 +28,10 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
     }}
   />
 );
+
+PrivateRoute.propTypes = {
+  component: PropTypes.element,
+  location: PropTypes.object
+};
 
 export default PrivateRoute;

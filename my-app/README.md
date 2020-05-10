@@ -1,4 +1,11 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Environment when running locally
+
+Create and .env file in the my-app directory and set the following variables, refer to .env.example as a reference.
+
+- REACT_APP_API_URL should be set to the url that your backend is running on, most likely REACT_APP_API_URL=http://localhost:3000/api
+- PORT can be set to anything, however it defaults to 3000, i'd reccomend changing this to something other than 3000 as our backend also defaults to 3000
+
 ## Required VSCode Plugins
 
 ESLint:

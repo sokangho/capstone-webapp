@@ -15,8 +15,27 @@ const getApplications = async () => {
   return axios(options);
 };
 
+const addApplication = async ({ applicationName, applicationDescription }) => {
+  const { currentUser } = authenticationService;
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      ...authHeader()
+    },
+    url: `${process.env.REACT_APP_API_URL}/applications/`,
+    data: {
+      applicationName,
+      accountId: currentUser.userProfile.id,
+      applicationDescription
+    }
+  };
+  return axios(options);
+};
+
 const applicationService = {
-  getApplications
+  getApplications,
+  addApplication
 };
 
 export default applicationService;

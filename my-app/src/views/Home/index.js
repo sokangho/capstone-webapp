@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import fontLoader from '../../components/FontLoader';
 import ApplicationTable from '../../components/ApplicationTable';
+import AddApplicationForm from '../../components/AddApplicationForm';
+
 import authenticationService from '../../services/authentication.service';
 import applicationService from '../../services/application.service';
 
@@ -55,7 +57,8 @@ class HomeView extends Component {
     this.state = {
       // Will pass this as a prop to header
       // currentUser: authenticationService.currentUser,
-      applications: []
+      applications: [],
+      isModalOpen: false
     };
 
     this.logout = this.logout.bind(this);
@@ -69,6 +72,14 @@ class HomeView extends Component {
     this.setState({ applications: res.data });
   }
 
+  openModal() {
+    this.setState({ isModalOpen: true });
+  }
+
+  closeModal() {
+    this.setState({ isModalOpen: false });
+  }
+
   logout() {
     const { history } = this.props;
     authenticationService.logout();
@@ -76,7 +87,7 @@ class HomeView extends Component {
   }
 
   render() {
-    const { applications } = this.state;
+    const { applications, isModalOpen } = this.state;
 
     return (
       <>
@@ -85,9 +96,12 @@ class HomeView extends Component {
         </TitleContainer>
         <MainContentContainer>
           <ButtonContainer>
-            <AddApplicationButton>Add Application</AddApplicationButton>
+            <AddApplicationButton onClick={() => this.openModal()}>
+              Add Application
+            </AddApplicationButton>
           </ButtonContainer>
           <ApplicationTable applications={applications} />
+          <AddApplicationForm isModalOpen={isModalOpen} onRequestCloseFunc={() => this.closeModal()} modalLabel="Add Application Modal" />
         </MainContentContainer>
       </>
     );
