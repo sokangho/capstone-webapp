@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import fontLoader from '../../components/FontLoader';
 import Userlist from '../../components/UserList/UserList';
+import OtpSettingsPanel from '../../components/OtpSettingsPanel/OtpSettingsPanel';
 import Header from '../../components/StyledComponents/StyledHeader';
 import { fontUrls } from '../../styleGuide';
 
@@ -17,14 +18,14 @@ class ApplicationDashboardView extends Component {
   }
 
   render() {
-    const { location, match } = this.props;
-    const { applicationName } = location.state;
+    const { match } = this.props;
     const { applicationId } = match.params;
     return (
       <div>
-        <Header title={`${applicationName} Dashboard`} />
+        <Header title={`Dashboard`} />
         <ContentContainer>
           <Link to="/">Back</Link>
+          <OtpSettingsPanel applicationId={applicationId}/>
           <Userlist
             applicationId={applicationId}
           />

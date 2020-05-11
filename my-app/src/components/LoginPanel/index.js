@@ -3,17 +3,11 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 import { colors, fonts } from '../../styleGuide';
+import StyledPanel from '../../components/StyledComponents/StyledPanel'
 
-const Panel = styled.div`
+const Panel = styled(StyledPanel)`
   width: 300px;
   height: 320px;
-  margin-top: 20px;
-
-  background: ${colors.primaryWhite};
-  text-align: left;
-
-  box-shadow: 0px 0px 10px ${colors.borderLight};
-  outline: 1px solid ${colors.borderLight};
 `;
 
 const ContentContainer = styled.form`
