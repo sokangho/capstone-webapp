@@ -38,12 +38,13 @@ class ApplicationDashboardView extends Component {
 
   render() {
     const { application, applicationId } = this.state;
+    const { applicationName } = application;
     if (!application || !applicationId) {
       return null;
     }
     return (
       <div>
-        <Header title={`${application.applicationName} Dashboard`} />
+        <Header title={`${applicationName} Dashboard`} />
         <ContentContainer>
           <Link to="/">Back</Link>
           <OtpSettingsPanel application={application} />
