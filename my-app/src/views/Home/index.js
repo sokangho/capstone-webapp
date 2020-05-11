@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import fontLoader from '../../components/FontLoader';
 import ApplicationTable from '../../components/ApplicationTable';
-import AddApplicationForm from '../../components/AddApplicationForm';
+import AddApplicationForm from '../../components/AddApplicationModal';
 
 import authenticationService from '../../services/authentication.service';
 import applicationService from '../../services/application.service';

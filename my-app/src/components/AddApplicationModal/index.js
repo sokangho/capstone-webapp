@@ -128,9 +128,11 @@ class AddApplicationModal extends React.Component {
   }
 
   render() {
-    const { isModalOpen, onRequestCloseFunc, modalLabel } = this.props;
+    const {
+      isModalOpen, onRequestCloseFunc, modalLabel, appElementSelector
+    } = this.props;
     const { appName, appDescription } = this.state;
-    Modal.setAppElement('#root');
+    Modal.setAppElement(appElementSelector);
 
     return (
       <Modal
@@ -178,5 +180,11 @@ export default AddApplicationModal;
 AddApplicationModal.propTypes = {
   isModalOpen: PropTypes.bool,
   onRequestCloseFunc: PropTypes.func,
-  modalLabel: PropTypes.string
+  modalLabel: PropTypes.string,
+  appElementSelector: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Element)
+  ])
+};
+
+AddApplicationModal.defaultProps = {
+  appElementSelector: '#root'
 };

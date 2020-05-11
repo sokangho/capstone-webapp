@@ -30,7 +30,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
 );
 
 PrivateRoute.propTypes = {
-  component: PropTypes.element,
+  component: PropTypes.oneOfType([PropTypes.func, PropTypes.element]),
   location: PropTypes.object
 };
 
