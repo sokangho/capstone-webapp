@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import applicationService from '../../services/application.service';
 import fontLoader from '../../components/FontLoader';
 import Userlist from '../../components/UserList/UserList';
 import OtpSettingsPanel from '../../components/OtpSettingsPanel/OtpSettingsPanel';
@@ -13,20 +14,39 @@ const ContentContainer = styled.div`
 `;
 
 class ApplicationDashboardView extends Component {
-  componentDidMount() {
-    fontLoader(fontUrls.robotoSlab, document);
+  constructor(props) {
+    super(props);
+    this.state = {
+      application: {},
+      applicationId: 0
+    };
   }
 
-  // todo figure out applicationName
-  render() {
+  async componentDidMount() {
+    fontLoader(fontUrls.robotoSlab, document);
     const { match } = this.props;
     const { applicationId } = match.params;
+    const res = await applicationService.getApplicationById(applicationId);
+    // Check if res is successful
+    if (res.status === 200) {
+      this.setState({
+        application: res.data,
+        applicationId
+      });
+    }
+  }
+
+  render() {
+    const { application, applicationId } = this.state;
+    if (!application || !applicationId) {
+      return null;
+    }
     return (
       <div>
-        <Header title={`Dashboard`} />
+        <Header title={`${application.applicationName} Dashboard`} />
         <ContentContainer>
           <Link to="/">Back</Link>
-          <OtpSettingsPanel applicationId={applicationId} />
+          <OtpSettingsPanel application={application} />
           <Userlist
             applicationId={applicationId}
           />

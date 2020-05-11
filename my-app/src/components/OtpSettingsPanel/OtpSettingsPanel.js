@@ -69,20 +69,18 @@ class OtpSettingsPanel extends Component {
     this.state = {
       changesMade: false,
       showConfirmation: false,
-      lifetimeUnit: 'seconds',
-      application: []
+      lifetimeUnit: 'seconds'
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
 
-  async componentDidMount() {
-    const { applicationId } = this.props;
-    const res = await applicationService.getApplicationById(applicationId);
+  componentDidMount() {
+    const { application } = this.props;
+    const { otpLength, otpLifetime } = application;
     this.setState({
-      application: res.data,
-      otpLength: res.data.otpLength,
-      otpLifetime: res.data.otpLifetime
+      otpLength,
+      otpLifetime
     });
     fontLoader(fontUrls.robotoSlab, document);
   }
@@ -100,15 +98,18 @@ class OtpSettingsPanel extends Component {
     const {
       otpLength,
       lifetimeUnit,
-      otpLifetime,
-      application
+      otpLifetime
     } = this.state;
+
+    const { application } = this.props;
+    const applicationId = application.id;
     const otpLifetimeConverted = LifeTimeUnitConverter(
       lifetimeUnit,
       parseInt(otpLifetime, 10)
     );
+
     const res = await applicationService.updateOtpSettings(
-      application.id,
+      applicationId,
       otpLifetimeConverted,
       parseInt(otpLength, 10)
     );
@@ -221,7 +222,9 @@ const PasswordLength = props => {
 };
 
 OtpSettingsPanel.propTypes = {
-  applicationId: PropTypes.number
+  application: PropTypes.object,
+  otpLength: PropTypes.number,
+  otpLifetime: PropTypes.number
 };
 
 PasswordLifetime.propTypes = {
