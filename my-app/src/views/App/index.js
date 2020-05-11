@@ -18,13 +18,13 @@ const GlobalBackgroundStyle = createGlobalStyle`
 
 const App = () => {
   return (
-    <div id="main">
+    <>
       <GlobalBackgroundStyle />
       <Switch>
         <Route exact path="/login" component={LoginView} />
         <PrivateRoute path="/" component={HomeView} />
       </Switch>
-    </div>
+    </>
   );
 };
 
