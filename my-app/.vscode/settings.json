@@ -1,4 +1,5 @@
 {
   "prettier.trailingComma": "none",
-  "prettier.arrowParens": "avoid"
+  "prettier.arrowParens": "avoid",
+  "prettier.singleQuote": true
 }
