@@ -6,6 +6,7 @@ import { colors } from '../../styleGuide';
 import LoginView from '../Login';
 import HomeView from '../Home';
 import PrivateRoute from '../../components/PrivateRoute';
+import ApplicationDashboardView from '../ApplicationDashboard';
 
 const GlobalBackgroundStyle = createGlobalStyle`
   html {
@@ -22,6 +23,10 @@ const App = () => {
       <GlobalBackgroundStyle />
       <Switch>
         <Route exact path="/login" component={LoginView} />
+        <PrivateRoute
+          path="/application-dashboard/:applicationId"
+          component={ApplicationDashboardView}
+        />
         <PrivateRoute path="/" component={HomeView} />
       </Switch>
     </>

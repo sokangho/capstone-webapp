@@ -2,20 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import fontLoader from '../../components/FontLoader';
 import { fontUrls, fonts, colors } from '../../styleGuide';
-
-const HeaderContainer = styled.div`
-  display: flex;
-  background-color: ${colors.headerBackground};
-  padding: 0px 50px;
-  border: 1px solid ${colors.borderLight};
-`;
-
-const HeaderTitle = styled.h1`
-  font-family: ${fonts.robotoSlab};
-  font-size: 30px;
-  font-weight: 400px;
-  color: ${colors.darkText};
-`;
+import Header from '../../components/StyledComponents/StyledHeader';
 
 const ButtonContainer = styled.div`
   padding: 0px 60px;
@@ -44,7 +31,7 @@ class AppList extends React.Component {
   render() {
     return (
       <>
-        <HeaderContainer><HeaderTitle>Applications</HeaderTitle></HeaderContainer>
+        <Header title="Applications" />
         <ButtonContainer>
           <AddApplicationButton>Add Application</AddApplicationButton>
         </ButtonContainer>

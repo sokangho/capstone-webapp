@@ -15,8 +15,20 @@ const getApplications = async () => {
   return axios(options);
 };
 
-const applicationService = {
-  getApplications
+const getUsers = async id => {
+  const options = {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      ...authHeader()
+    },
+    url: `${process.env.REACT_APP_API_URL}/applications/${id}/applicationusers`
+  };
+  return axios(options);
 };
 
+const applicationService = {
+  getApplications,
+  getUsers
+};
 export default applicationService;
