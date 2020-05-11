@@ -1,20 +1,21 @@
-import React, { Component } from "react";
-import styled from "styled-components";
-import { colors, fonts } from "../../styleGuide";
+import React, { Component } from 'react';
+import styled from 'styled-components';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import applicationService from '../../services/application.service';
-import fontLoader from '../FontLoader';
-import { fontUrls } from '../../styleGuide';
 import Tooltip from '@material-ui/core/Tooltip';
-import StyledPanel from '../../components/StyledComponents/StyledPanel'
+import PropTypes from 'prop-types';
+import fontLoader from '../FontLoader';
+import { colors, fonts, fontUrls } from '../../styleGuide';
+import StyledPanel from '../StyledComponents/StyledPanel';
+import applicationService from '../../services/application.service';
+import LifeTimeUnitConverter from '../../helpers/LifetimeUnitConverter';
 
 const OtpPanelContainer = styled(StyledPanel)`
   width: 600px;
   height: 300px;
-  
+
   .active-button {
     background-color: ${colors.primaryBlue};
     color: ${colors.primaryWhite};
@@ -59,13 +60,18 @@ const SaveButton = styled.button`
 `;
 
 const StyledFormControl = styled(FormControl)`
-  width:90px;
+  width: 90px;
 `;
 
 class OtpSettingsPanel extends Component {
   constructor(props) {
     super(props);
-    this.state = { changesMade:false, showConfirmation:false, lifetimeUnit: "seconds", application:[]};
+    this.state = {
+      changesMade: false,
+      showConfirmation: false,
+      lifetimeUnit: 'seconds',
+      application: []
+    };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
@@ -73,58 +79,68 @@ class OtpSettingsPanel extends Component {
   async componentDidMount() {
     const { applicationId } = this.props;
     const res = await applicationService.getApplicationById(applicationId);
-    this.setState({ application: res.data, 
+    this.setState({
+      application: res.data,
       otpLength: res.data.otpLength,
-      otpLifetime: res.data.otpLifetime  });
+      otpLifetime: res.data.otpLifetime
+    });
     fontLoader(fontUrls.robotoSlab, document);
   }
 
   onChange(e) {
-    //update the state of the input and whether changes have been made
+    // Update the state of the input and whether changes have been made
     this.setState({
       [e.target.name]: e.target.value,
-      changesMade:true
+      changesMade: true
     });
   }
 
   async onSubmit(e) {
     e.preventDefault();
-    const {otpLength, lifetimeUnit, otpLifetime, application } = this.state;
-    const otpLifetimeConverted= this.calculateLifetimeInSeconds(lifetimeUnit, parseInt(otpLifetime))
-    const res= await applicationService.updateOtpSettings(application.id, otpLifetimeConverted, parseInt(otpLength));
-    
-    //if response is a success, show confirmation message
-    if (res.status === 204)
-    {
+    const {
+      otpLength,
+      lifetimeUnit,
+      otpLifetime,
+      application
+    } = this.state;
+    const otpLifetimeConverted = LifeTimeUnitConverter(
+      lifetimeUnit,
+      parseInt(otpLifetime, 10)
+    );
+    const res = await applicationService.updateOtpSettings(
+      application.id,
+      otpLifetimeConverted,
+      parseInt(otpLength, 10)
+    );
+
+    // If response is a success, show confirmation message
+    if (res.status === 204) {
       this.showConfirmationMessage();
       this.setState({
-        changesMade:false
+        changesMade: false
       });
     }
   }
 
-  calculateLifetimeInSeconds(lifetimeUnit, otpLifetime){
-    if (lifetimeUnit === "minutes")
-    {
-      return otpLifetime * 60;
-    }
-    else return otpLifetime;
+  setConfirmation(boolean) {
+    this.setState({ showConfirmation: boolean });
   }
 
-  showConfirmationMessage(){
+  showConfirmationMessage() {
     this.setConfirmation(true);
-    setTimeout( () => {
+    setTimeout(() => {
       this.setConfirmation(false);
     }, 2500);
   }
-  
-  setConfirmation(boolean){
-    this.setState({showConfirmation: boolean});
-  }
 
   render() {
-    const {lifetimeUnit} = this.state;
-    const {otpLength, otpLifetime } = this.state;
+    const {
+      lifetimeUnit,
+      otpLength,
+      otpLifetime,
+      showConfirmation,
+      changesMade
+    } = this.state;
     return (
       <>
         <OtpPanelContainer>
@@ -132,12 +148,25 @@ class OtpSettingsPanel extends Component {
             <PanelHeading>OTP Settings</PanelHeading>
           </HeadingContainer>
           <form onSubmit={this.onSubmit}>
-            <PasswordLifetime lifetimeUnit = {lifetimeUnit} otpLifetime={otpLifetime} onChange = {this.onChange}/>
-            <PasswordLength otpLength={otpLength} onChange = {this.onChange}/>
-            <Tooltip title="Saved!"
-              open={this.state.showConfirmation}
-              placement="top">
-            <SaveButton className={this.state.changesMade ? 'active-button' : 'disabled-button'} type="submit">Save Changes</SaveButton>
+            <PasswordLifetime
+              lifetimeUnit={lifetimeUnit}
+              otpLifetime={otpLifetime}
+              onChange={this.onChange}
+            />
+            <PasswordLength otpLength={otpLength} onChange={this.onChange} />
+            <Tooltip
+              title="Saved!"
+              open={showConfirmation}
+              placement="top"
+            >
+              <SaveButton
+                className={
+                  changesMade ? 'active-button' : 'disabled-button'
+                }
+                type="submit"
+              >
+                Save Changes
+              </SaveButton>
             </Tooltip>
           </form>
         </OtpPanelContainer>
@@ -146,7 +175,7 @@ class OtpSettingsPanel extends Component {
   }
 }
 
-const PasswordLifetime = (props) => {
+const PasswordLifetime = props => {
   const { onChange, otpLifetime, lifetimeUnit } = props;
   return (
     <InputContainer style={{ float: 'left' }}>
@@ -166,15 +195,15 @@ const PasswordLifetime = (props) => {
           name="lifetimeUnit"
           autoWidth
         >
-          <MenuItem value={"seconds"}>Seconds</MenuItem>
-          <MenuItem value={"minutes"}>Minutes</MenuItem>
+          <MenuItem value="seconds">Seconds</MenuItem>
+          <MenuItem value="minutes">Minutes</MenuItem>
         </Select>
       </StyledFormControl>
     </InputContainer>
   );
-}
+};
 
-const PasswordLength = (props) => {
+const PasswordLength = props => {
   const { onChange, otpLength } = props;
   return (
     <InputContainer>
@@ -185,10 +214,25 @@ const PasswordLength = (props) => {
         value={otpLength}
         InputProps={{ inputProps: { min: 4, max: 20 } }}
         onChange={onChange}
-        name ="otpLength"
+        name="otpLength"
       />
     </InputContainer>
   );
-}
+};
+
+OtpSettingsPanel.propTypes = {
+  applicationId: PropTypes.number
+};
+
+PasswordLifetime.propTypes = {
+  otpLifetime: PropTypes.number,
+  lifetimeUnit: PropTypes.string,
+  onChange: PropTypes.func
+};
+
+PasswordLength.propTypes = {
+  otpLength: PropTypes.number,
+  onChange: PropTypes.func
+};
 
 export default OtpSettingsPanel;

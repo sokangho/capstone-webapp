@@ -17,6 +17,7 @@ class ApplicationDashboardView extends Component {
     fontLoader(fontUrls.robotoSlab, document);
   }
 
+  // todo figure out applicationName
   render() {
     const { match } = this.props;
     const { applicationId } = match.params;
@@ -25,7 +26,7 @@ class ApplicationDashboardView extends Component {
         <Header title={`Dashboard`} />
         <ContentContainer>
           <Link to="/">Back</Link>
-          <OtpSettingsPanel applicationId={applicationId}/>
+          <OtpSettingsPanel applicationId={applicationId} />
           <Userlist
             applicationId={applicationId}
           />
@@ -36,8 +37,7 @@ class ApplicationDashboardView extends Component {
 }
 
 ApplicationDashboardView.propTypes = {
-  match: PropTypes.object,
-  location: PropTypes.object
+  match: PropTypes.object
 };
 
 export default ApplicationDashboardView;

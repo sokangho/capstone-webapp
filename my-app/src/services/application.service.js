@@ -2,7 +2,7 @@ import axios from 'axios';
 import authHeader from '../helpers/authHeader';
 import authenticationService from './authentication.service';
 
-//Return a collection of Applications belonging to the current user
+// Return a collection of Applications belonging to the current user
 const getApplications = async () => {
   const { currentUser } = authenticationService;
   const options = {
@@ -16,7 +16,7 @@ const getApplications = async () => {
   return axios(options);
 };
 
-//Return a collection of Users belonging to a specific Application
+// Return a collection of Users belonging to a specific Application
 const getUsers = async id => {
   const options = {
     method: 'GET',
@@ -29,7 +29,7 @@ const getUsers = async id => {
   return axios(options);
 };
 
-//Returns an Application with the provided Application Id
+// Returns an Application with the provided Application Id
 const getApplicationById = async id => {
   const options = {
     method: 'GET',
@@ -42,7 +42,7 @@ const getApplicationById = async id => {
   return axios(options);
 };
 
-//Updates a given Application's OTP configuration settings to the specified values
+// Updates a given Application's OTP configuration settings to the specified values
 const updateOtpSettings = async (id, otpLifetime, otpLength) => {
   const options = {
     method: 'PATCH',
@@ -50,9 +50,9 @@ const updateOtpSettings = async (id, otpLifetime, otpLength) => {
       'Content-Type': 'application/json',
       ...authHeader()
     },
-    data:{
-      otpLength: otpLength,
-      otpLifetime: otpLifetime
+    data: {
+      otpLength,
+      otpLifetime
     },
     url: `${process.env.REACT_APP_API_URL}/applications/${id}`
   };

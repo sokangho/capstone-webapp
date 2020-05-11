@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 import { colors, fonts } from '../../styleGuide';
-import StyledPanel from '../../components/StyledComponents/StyledPanel'
+import StyledPanel from '../StyledComponents/StyledPanel';
 
 const Panel = styled(StyledPanel)`
   width: 300px;
