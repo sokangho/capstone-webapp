@@ -112,9 +112,9 @@ class AddApplicationModal extends React.Component {
     };
   }
 
-  createNewApplication() {
+  async createNewApplication() {
     const { appName, appDescription } = this.state;
-    applicationService.addApplication(
+    await applicationService.addApplication(
       { applicationName: appName, applicationDescription: appDescription }
     );
   }
