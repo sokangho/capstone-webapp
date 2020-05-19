@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import applicationService from '../../services/application.service';
 import fontLoader from '../../components/FontLoader';
 import Userlist from '../../components/UserList/UserList';
+import OtpSettingsPanel from '../../components/OtpSettingsPanel/OtpSettingsPanel';
 import Header from '../../components/StyledComponents/StyledHeader';
 import { fontUrls } from '../../styleGuide';
 
@@ -12,19 +14,40 @@ const ContentContainer = styled.div`
 `;
 
 class ApplicationDashboardView extends Component {
-  componentDidMount() {
+  constructor(props) {
+    super(props);
+    this.state = {
+      application: {},
+      applicationId: 0
+    };
+  }
+
+  async componentDidMount() {
     fontLoader(fontUrls.robotoSlab, document);
+    const { match } = this.props;
+    const { applicationId } = match.params;
+    const res = await applicationService.getApplicationById(applicationId);
+    // Check if res is successful
+    if (res.status === 200) {
+      this.setState({
+        application: res.data,
+        applicationId
+      });
+    }
   }
 
   render() {
-    const { location, match } = this.props;
-    const { applicationName } = location.state;
-    const { applicationId } = match.params;
+    const { application, applicationId } = this.state;
+    const { applicationName } = application;
+    if (!application || !applicationId) {
+      return null;
+    }
     return (
       <div>
         <Header title={`${applicationName} Dashboard`} />
         <ContentContainer>
           <Link to="/">Back</Link>
+          <OtpSettingsPanel application={application} />
           <Userlist
             applicationId={applicationId}
           />
@@ -35,8 +58,7 @@ class ApplicationDashboardView extends Component {
 }
 
 ApplicationDashboardView.propTypes = {
-  match: PropTypes.object,
-  location: PropTypes.object
+  match: PropTypes.object
 };
 
 export default ApplicationDashboardView;
