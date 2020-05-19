@@ -8,7 +8,8 @@ export const colorCodes = {
   gray: '#808080',
   black: '#000000',
   white: '#FFFFFF',
-  lightgray: '#D3D3D3'
+  lightgray: '#D3D3D3',
+  mediumGray: '#696969'
 };
 
 export const colors = {

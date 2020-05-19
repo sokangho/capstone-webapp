@@ -29,6 +29,24 @@ const getUsers = async id => {
   return axios(options);
 };
 
+const addApplication = async ({ applicationName, applicationDescription }) => {
+  const { currentUser } = authenticationService;
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      ...authHeader()
+    },
+    url: `${process.env.REACT_APP_API_URL}/applications/`,
+    data: {
+      applicationName,
+      accountId: currentUser.userProfile.id,
+      applicationDescription
+    }
+  };
+  return axios(options);
+};
+
 // Returns an Application with the provided Application Id
 const getApplicationById = async id => {
   const options = {
@@ -61,8 +79,10 @@ const updateOtpSettings = async (id, otpLifetime, otpLength) => {
 
 const applicationService = {
   getApplications,
+  addApplication,
   getUsers,
   getApplicationById,
   updateOtpSettings
 };
+
 export default applicationService;
