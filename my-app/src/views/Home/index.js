@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import fontLoader from '../../components/FontLoader';
 import ApplicationTable from '../../components/ApplicationTable';
 import AddApplicationForm from '../../components/AddApplicationModal';
+import Header from '../../components/Header';
 
 import authenticationService from '../../services/authentication.service';
 import applicationService from '../../services/application.service';
@@ -91,6 +92,7 @@ class HomeView extends Component {
 
     return (
       <>
+        <Header />
         <TitleContainer>
           <AppListTitle>Applications</AppListTitle>
         </TitleContainer>
