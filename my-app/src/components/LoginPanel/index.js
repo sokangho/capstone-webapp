@@ -93,6 +93,7 @@ class LoginPanel extends React.Component {
       password
     };
 
+    localStorage.setItem('displayName', username);
     onSubmit(credential);
   }
 

@@ -7,6 +7,8 @@ import fontLoader from '../../components/FontLoader';
 import Userlist from '../../components/UserList/UserList';
 import OtpSettingsPanel from '../../components/OtpSettingsPanel/OtpSettingsPanel';
 import Header from '../../components/StyledComponents/StyledHeader';
+import AppHeader from '../../components/Header';
+
 import { fontUrls } from '../../styleGuide';
 
 const ContentContainer = styled.div`
@@ -44,6 +46,7 @@ class ApplicationDashboardView extends Component {
     }
     return (
       <div>
+        <AppHeader />
         <Header title={`${applicationName} Dashboard`} />
         <ContentContainer>
           <Link to="/">Back</Link>
